@@ -4,7 +4,7 @@ import { MdShoppingCart } from "react-icons/md";
 import img from "../../public/images/64 - N87odiI.jpg";
 const MenuItem = () => {
   return (
-    <div className="bg-slate-800 text-white text-sm rounded-xl">
+    <div className="bg-[#cffafe] text-white text-sm rounded-xl text-black">
       <div className="">
         <Image
           className="rounded-b-[40px] cursor-pointer hover:scale-105 transition-all "
@@ -21,7 +21,7 @@ const MenuItem = () => {
         <div className="flex justify-between items-center">
           <p>$20</p>
           <button className=" bg-yellow-300 rounded-full ">
-            <MdShoppingCart className="inline  " size={25} />
+            <MdShoppingCart className="inline" size={25} />
           </button>
         </div>
       </div>

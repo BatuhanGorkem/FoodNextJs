@@ -1,52 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
+import NavLink from "../components/NavLink";
 import { FaUserAlt, FaShoppingCart, FaSearch } from "react-icons/fa";
-import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
-import Title from "../ui/Title";
-
+import Link from "next/link";
 const Header = () => {
-  const [IsSearchModal, setIsSearchModal] = useState(false);
+  const items = [
+    { id: 1, name: "Home", link: "/" },
+    { id: 2, name: "About", link: "/about" },
+    { id: 3, name: "Menu", link: "/menu" },
+    { id: 4, name: "Book Table", link: "/BookTable" },
+  ];
   return (
-    <>
-      <div className="h-[5.5rem] bg-slate-700 px-10 ">
-        <div className="flex justify-between text-white  items-center h-full">
-          <div className="text-[2rem] text-red-500 font-bold">JOBS</div>
-          <div>
-            <nav>
-              <ul className="flex gap-4 ">
-                <li>HOME</li>
-                <li>MENU</li>
-                <li>ABOUT</li>
-                <li>BOOK TABLE</li>
-              </ul>
-            </nav>
-          </div>
-          <div className="flex gap-3 items-center">
-            <a href="">
-              <FaUserAlt className="hover:text-yellow-300 transition-all" />
-            </a>
-            <a href="">
-              <FaShoppingCart className="hover:text-yellow-300 transition-all" />
-            </a>
-
-            <FaSearch
-              onClick={() => setIsSearchModal((prev) => !prev)}
-              className="hover:text-yellow-300 transition-all"
-            />
-
-            <a href="">
-              <button className="rounded-lg cursor-pointer bg-yellow-600 p-1">
-                OrderOnline
-              </button>
-            </a>
-          </div>
-        </div>
-        {IsSearchModal && (
-          <div className="position w-screen h-screen bg-black z-50">
-            <Title title="title" />
-          </div>
-        )}
+    <div className="flex justify-between items-center  px-20  ">
+      <div>
+        <h1 className="text-[60px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-500">
+          JOBS
+        </h1>
       </div>
-    </>
+      <div className="flex gap-5 font-semibold">
+        {items.map((item) => (
+          <NavLink key={item.key} name={item.name} link={item.link} />
+        ))}
+      </div>
+      <div className="flex gap-3 items-center">
+        <Link href="/auth/login">
+          <FaUserAlt />
+        </Link>
+        <Link href="/cart">
+          <FaShoppingCart />
+        </Link>
+        <Link href="/auth/login">
+          <FaSearch />
+        </Link>
+        <button className=" relative bg-gradient-to-r from-cyan-500 to-blue-500 py-1 px-3 rounded-lg  text-white hover:scale-105 transition-all">
+          <span className="t">Order Online</span>
+        </button>
+      </div>
+    </div>
   );
 };
 
