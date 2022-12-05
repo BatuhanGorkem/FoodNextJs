@@ -62,31 +62,32 @@ const Register = () => {
   ];
 
   return (
-    <Layout title="Register">
-      <div className="px-80">
-        <h1 className="text-center text-[40px] font-bold">REGİSTER</h1>
-        <form onSubmit={handleSubmit}>
-          {inputs.map((input) => (
-            <Input
-              key={input.id}
-              {...input}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            ></Input>
-          ))}
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-cyan-500 to-blue-500 py-1 px-10 rounded-lg  text-white hover:scale-105 transition-all"
-          >
-            Register
-          </button>
+    <Layout>
+      <div className="px-40 py-3 h-[600px]">
+        <form
+          className="flex flex-col items-center my-20 md:w-1/2 w-full mx-auto"
+          onSubmit={handleSubmit}
+        >
+          <h1 className="text-[30px] font-semibold pb-6"> Register</h1>
+          <div className="flex flex-col gap-y-3 w-full">
+            {inputs.map((input) => (
+              <Input
+                key={input.id}
+                {...input}
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            ))}
+          </div>
+          <div className="flex flex-col w-full gap-y-3 mt-6">
+            <button
+              type="submit"
+              className="outline outline-blue-600  hover:bg-blue-600 hover:text-white transition-all mx-60 rounded-xl"
+            >
+              LOGIN
+            </button>
+          </div>
         </form>
-        <Link href="/auth/login">
-          <span className="text-sm underline cursor-pointer text-secondary">
-            Do you have a account?
-          </span>
-        </Link>
-        <button className="text-center">GİTHUB</button>
       </div>
     </Layout>
   );

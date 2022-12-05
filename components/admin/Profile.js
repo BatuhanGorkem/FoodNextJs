@@ -3,7 +3,7 @@ import React from "react";
 import img from "../.././public/images/deneme.jpg";
 const Profile = ({ tabs, setTabs }) => {
   return (
-    <div className="  border border-gray-300 text-center ">
+    <div className="border border-gray-300 text-center ">
       <div>
         <Image
           className="rounded-full mx-auto"
@@ -15,13 +15,16 @@ const Profile = ({ tabs, setTabs }) => {
         <h1>Batuhan Görkem</h1>
       </div>
       <div onClick={() => setTabs(0)} className="my-2 border cursor-pointer">
-        <span>Account</span>
+        <span>Products</span>
       </div>
       <div onClick={() => setTabs(1)} className="my-2 border cursor-pointer">
-        <span>Password</span>
+        <span>Orders</span>
       </div>
       <div onClick={() => setTabs(2)} className="my-2 border cursor-pointer">
-        <span>Orders</span>
+        <span>Categories</span>
+      </div>
+      <div onClick={() => setTabs(3)} className="my-2 border cursor-pointer">
+        <span>Footer</span>
       </div>
       <div className="my-2 border cursor-pointer">
         <span>Exıt</span>

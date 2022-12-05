@@ -1,0 +1,8 @@
+.input {
+  div {
+    @apply py-1;
+  }
+  span {
+    @apply hover:bg-gradient-to-r from-cyan-500 to-blue-500 transition-all;
+  }
+}
