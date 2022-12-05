@@ -3,11 +3,12 @@ import { useFormik } from "formik";
 import { registerSchema } from "../../schema/registerSchema";
 import Link from "next/link";
 import Layout from "../../layout/Layout";
+import axios from "axios";
 const Register = () => {
   const onSubmit = async (values, actions) => {
     alert(JSON.stringify(values, null, 2));
     await new Promise((resolve) => setTimeout(resolve, 4000));
-
+    console.log(values);
     actions.resetForm();
   };
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -55,9 +56,9 @@ const Register = () => {
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm Password",
-      value: values.password,
-      errorMessage: errors.password,
-      touched: touched.password,
+      value: values.confirmPassword,
+      errorMessage: errors.confirmPassword,
+      touched: touched.confirmPassword,
     },
   ];
 
@@ -84,7 +85,7 @@ const Register = () => {
               type="submit"
               className="outline outline-blue-600  hover:bg-blue-600 hover:text-white transition-all mx-60 rounded-xl"
             >
-              LOGIN
+              REGİSTER
             </button>
           </div>
         </form>

@@ -3,7 +3,10 @@ import { useFormik } from "formik";
 import { loginSchema } from "../../schema/loginSchema";
 import Layout from "../../layout/Layout";
 import Link from "next/link";
+import { useSession, signIn } from "next-auth/react";
 const Login = () => {
+  const { data: session } = useSession();
+  console.log(session);
   const onSubmit = async (values, actions) => {
     alert(JSON.stringify(values, null, 2));
     await new Promise((resolve) => setTimeout(resolve, 4000));
@@ -18,7 +21,7 @@ const Login = () => {
       onSubmit,
       validationSchema: loginSchema,
     });
-  console.log(values);
+
   const inputs = [
     {
       id: 1,
@@ -64,6 +67,13 @@ const Login = () => {
               className="outline outline-blue-600  hover:bg-blue-600 hover:text-white transition-all mx-60 rounded-xl"
             >
               LOGIN
+            </button>
+            <button
+              onClick={() => signIn("github")}
+              type="button"
+              className="outline outline-blue-600  hover:bg-blue-600 hover:text-white transition-all mx-60 rounded-xl"
+            >
+              GİTHUB
             </button>
             <Link href="/auth/register">
               <span className="text-sm underline cursor-pointer text-secondary ">

@@ -1,5 +1,4 @@
-const mongoose = require("mongoose"); // Erase if already required
-
+import mongoose from "mongoose";
 // Declare the Schema of the Mongo model
 const UserSchema = new mongoose.Schema(
   {
@@ -39,5 +38,4 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//Export the model
-module.exports = mongoose.model("User", UserSchema);
+export default mongoose.models.User || mongoose.model("User", UserSchema);
