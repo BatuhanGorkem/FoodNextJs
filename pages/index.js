@@ -6,10 +6,10 @@ import Layout from "../layout/Layout";
 import styles from "../styles/Home.module.scss";
 export default function Home() {
   return (
-    <Layout title="Main Page">
+    <>
       <Campaigns></Campaigns>
       <MenuWrapper></MenuWrapper>
       <Reservation></Reservation>
-    </Layout>
+    </>
   );
 }

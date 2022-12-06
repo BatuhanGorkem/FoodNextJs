@@ -1,7 +1,28 @@
+import { signOut, useSession, getSession } from "next-auth/react";
+import { redirect } from "next/dist/server/api-utils";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import img from "../.././public/images/deneme.jpg";
-const Profile = ({ tabs, setTabs }) => {
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+const Profile = ({ setTabs, session }) => {
+  // const { data: session } = useSession();
+  const { push } = useRouter();
+  const handleSignOut = () => {
+    if (window.confirm("Are you sure?")) {
+      signOut({ redirect: false });
+      toast.success("Logout Success!");
+      push("/");
+    }
+  };
+  useEffect(() => {
+    if (!session) {
+      push("/auth/login");
+    }
+  }, [session, push]);
+
   return (
     <div className="  border border-gray-300 text-center ">
       <div>
@@ -23,7 +44,7 @@ const Profile = ({ tabs, setTabs }) => {
       <div onClick={() => setTabs(2)} className="my-2 border cursor-pointer">
         <span>Orders</span>
       </div>
-      <div className="my-2 border cursor-pointer">
+      <div onClick={handleSignOut} className="my-2 border cursor-pointer">
         <span>Exıt</span>
       </div>
     </div>

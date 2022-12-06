@@ -1,7 +1,25 @@
 import Image from "next/image";
 import React from "react";
 import img from "../.././public/images/deneme.jpg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
+import axios from "axios";
 const Profile = ({ tabs, setTabs }) => {
+  const { push } = useRouter();
+  const closeAdmin = async () => {
+    try {
+      if (window.confirm("Are you sure?")) {
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/admin`);
+        if (res.status === 200) {
+          toast.success("Admin Logout Success!");
+          push("/admin");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="border border-gray-300 text-center ">
       <div>
@@ -26,7 +44,7 @@ const Profile = ({ tabs, setTabs }) => {
       <div onClick={() => setTabs(3)} className="my-2 border cursor-pointer">
         <span>Footer</span>
       </div>
-      <div className="my-2 border cursor-pointer">
+      <div onClick={closeAdmin} className="my-2 border cursor-pointer">
         <span>Exıt</span>
       </div>
     </div>

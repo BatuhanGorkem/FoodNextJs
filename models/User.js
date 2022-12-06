@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 // Declare the Schema of the Mongo model
 const UserSchema = new mongoose.Schema(
   {
-    name: {
+    fullName: {
       type: String,
       required: true,
     },
