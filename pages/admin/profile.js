@@ -21,18 +21,18 @@ const AdminProfile = () => {
     </div>
   );
 };
-export const getServerSideProps = async (ctx) => {
-  const { token } = ctx.req.cookies;
-  if (token === process.env.ADMIN_TOKEN) {
-    return {
-      redirect: {
-        destination: "/admin",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {},
-  };
-};
+// export const getServerSideProps = async (ctx) => {
+//   const { token } = ctx.req.cookies;
+//   if (token === process.env.ADMIN_TOKEN) {
+//     return {
+//       redirect: {
+//         destination: "/admin/profile",
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: {},
+//   };
+// };
 export default AdminProfile;

@@ -12,6 +12,7 @@ const MenuItem = () => {
             className="rounded-b-[40px] cursor-pointer hover:scale-105 transition-all "
             src={img}
             alt="img"
+            priority
           ></Image>
         </Link>
       </div>

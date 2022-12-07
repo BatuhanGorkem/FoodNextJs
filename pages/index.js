@@ -1,15 +1,22 @@
+import axios from "axios";
 import Campaigns from "../components/Campaigns";
 import MenuWrapper from "../components/products/MenuWrapper";
-import About from "../components/About";
 import Reservation from "../components/Reservation";
-import Layout from "../layout/Layout";
-import styles from "../styles/Home.module.scss";
-export default function Home() {
+
+export default function Home({ categoryList }) {
   return (
     <>
       <Campaigns></Campaigns>
-      <MenuWrapper></MenuWrapper>
+      <MenuWrapper categoryList={categoryList}></MenuWrapper>
       <Reservation></Reservation>
     </>
   );
 }
+export const getServerSideProps = async () => {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
+  return {
+    props: {
+      categoryList: res.data ? res.data : [],
+    },
+  };
+};

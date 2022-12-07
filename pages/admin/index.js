@@ -91,8 +91,8 @@ const Login = () => {
   );
 };
 export const getServerSideProps = async (ctx) => {
-  const { token } = ctx.req.cookies;
-  if (token === process.env.ADMIN_TOKEN) {
+  const myCookie = ctx.req?.cookies || "";
+  if (myCookie.token === process.env.ADMIN_TOKEN) {
     return {
       redirect: {
         destination: "/admin/profile",
@@ -100,6 +100,7 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   }
+
   return {
     props: {},
   };
