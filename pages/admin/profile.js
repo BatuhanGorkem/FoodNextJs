@@ -4,9 +4,10 @@ import Footer from "../../components/admin/Footer";
 import Order from "../../components/admin/Order";
 import Products from "../../components/admin/Products";
 import Profile from "../../components/admin/Profile";
-
+import AddProduct from "../../components/admin/AddProductForm";
 const AdminProfile = () => {
   const [tabs, setTabs] = useState(0);
+  const [isProductModal, setIsProductModal] = useState(false);
   return (
     <div className="grid grid-cols-12 px-20 gap-2 my-20 min-h-screen">
       <div className="col-span-3 ">
@@ -17,6 +18,13 @@ const AdminProfile = () => {
         {1 === tabs ? <Order></Order> : null}
         {2 === tabs ? <Category></Category> : null}
         {3 === tabs ? <Footer></Footer> : null}
+        {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
+        <button
+          className="btn-primary !w-12 !h-12 !p-0 absolute bottom-14 right-10 text-4xl"
+          onClick={() => setIsProductModal(true)}
+        >
+          +
+        </button>
       </div>
     </div>
   );
