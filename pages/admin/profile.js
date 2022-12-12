@@ -5,7 +5,8 @@ import Order from "../../components/admin/Order";
 import Products from "../../components/admin/Products";
 import Profile from "../../components/admin/Profile";
 import AddProduct from "../../components/admin/AddProductForm";
-const AdminProfile = () => {
+import About from "../../components/admin/About";
+const AdminProfile = ({ data }) => {
   const [tabs, setTabs] = useState(0);
   const [isProductModal, setIsProductModal] = useState(false);
   return (
@@ -18,6 +19,7 @@ const AdminProfile = () => {
         {1 === tabs ? <Order></Order> : null}
         {2 === tabs ? <Category></Category> : null}
         {3 === tabs ? <Footer></Footer> : null}
+        {4 === tabs ? <About data={data}></About> : null}
         {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
         <button
           className="btn-primary !w-12 !h-12 !p-0 absolute bottom-14 right-10 text-4xl"
@@ -43,4 +45,5 @@ const AdminProfile = () => {
 //     props: {},
 //   };
 // };
+
 export default AdminProfile;

@@ -13,10 +13,10 @@ const AddProduct = ({ setIsProductModal }) => {
   const [srcImage, setSrcImage] = useState();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [prices, setPrices] = useState([]);
+  // const [prices, setPrices] = useState([]);
   const [category, setCategory] = useState("");
-  const [extra, setExtra] = useState("");
-  const [extraOptions, setExtraOptions] = useState([]);
+  // const [extra, setExtra] = useState("");
+  // const [extraOptions, setExtraOptions] = useState([]);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -33,19 +33,19 @@ const AddProduct = ({ setIsProductModal }) => {
     getCategories();
   }, []);
 
-  const changePrice = (e, index) => {
-    const newPrices = [...prices];
-    newPrices[index] = e.target.value;
-    setPrices(newPrices);
-  };
-  const handleExtra = (e) => {
-    if (extra) {
-      if (extra.text && extra.price) {
-        setExtraOptions((prev) => [...prev, extra]);
-        // setExtra({ text: "", price: "" });
-      }
-    }
-  };
+  // const changePrice = (e, index) => {
+  //   const newPrices = [...prices];
+  //   newPrices[index] = e.target.value;
+  //   setPrices(newPrices);
+  // };
+  // const handleExtra = (e) => {
+  //   if (extra) {
+  //     if (extra.text && extra.price) {
+  //       setExtraOptions((prev) => [...prev, extra]);
+  //       // setExtra({ text: "", price: "" });
+  //     }
+  //   }
+  // };
 
   const handleOnChange = (changeEvent) => {
     const reader = new FileReader();
@@ -74,8 +74,8 @@ const AddProduct = ({ setIsProductModal }) => {
         title,
         desc,
         category: category.toLowerCase(),
-        prices,
-        extraOptions,
+        // prices,
+        // extraOptions,
       };
 
       const res = await axios.post(
@@ -143,7 +143,7 @@ const AddProduct = ({ setIsProductModal }) => {
               </select>
             </div>
 
-            <div className="flex flex-col text-sm mt-4 w-full">
+            {/* <div className="flex flex-col text-sm mt-4 w-full">
               <span className="font-semibold mb-[2px]">Prices</span>
               {category === "pizza" ? (
                 <div className="flex justify-between gap-6 w-full md:flex-nowrap flex-wrap">
@@ -171,8 +171,8 @@ const AddProduct = ({ setIsProductModal }) => {
                   onChange={(e) => changePrice(e, 0)}
                 />
               )}
-            </div>
-            <div className="flex flex-col text-sm mt-4 w-full">
+            </div> */}
+            {/* <div className="flex flex-col text-sm mt-4 w-full">
               <span className="font-semibold mb-[2px]">Extra</span>
               <div className="flex  gap-6 w-full md:flex-nowrap flex-wrap">
                 <input
@@ -212,7 +212,7 @@ const AddProduct = ({ setIsProductModal }) => {
                   </span>
                 ))}
               </div>
-            </div>
+            </div> */}
             <div className="flex justify-end">
               <button
                 className="btn-primary bg-blue-500 hover:bg-blue-600 mt-4 "

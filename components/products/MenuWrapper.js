@@ -1,24 +1,34 @@
+import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import MenuItem from "./MenuItem";
-const MenuWrapper = ({ categoryList, productList }) => {
+
+const MenuWrapper = ({ dataCat, dataProduct }) => {
   const [active, setActive] = useState(0);
   const [filtered, setFiltered] = useState([]);
+  // const [products, setProducts] = useState([]);
+
+  // const getProducts = async () => {
+  //   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+  //   setProducts(res.data);
+  // };
+  const filterProducts = () => {
+    const filtered = dataProduct?.filter(
+      (item) => item.category === dataCat[active]?.title.toLowerCase()
+    );
+    setFiltered(filtered);
+  };
 
   useEffect(() => {
-    setFiltered(
-      productList.filter(
-        (item) => item.category === categoryList[active].title.toLowerCase()
-      )
-    );
-  }, [active, productList, categoryList]);
+    filterProducts();
+  }, [active, dataProduct]);
 
   return (
-    <div className="px-20 ">
-      <div>Our Menu</div>
-      <div>
-        {categoryList.map((item, index) => (
+    <div className="px-40">
+      <div className="text-center">Our Products</div>
+      <div className="flex justify-center gap-4">
+        {dataCat.map((item, index) => (
           <button
             onClick={() => setActive(index)}
             key={item._id}
@@ -32,7 +42,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
       </div>
       <div className="grid grid-cols-3 gap-8 ">
         {filtered &&
-          filtered.map((item) => (
+          filtered?.map((item) => (
             <MenuItem item={item} key={item._id}></MenuItem>
           ))}
       </div>

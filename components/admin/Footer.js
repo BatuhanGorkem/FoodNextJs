@@ -1,30 +1,64 @@
+import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { footerSchema } from "../../schema/footerSchema";
 import Input from "../form/Input";
+import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
-  const [linkAdress, setLinkAdress] = useState("");
-  const [iconName, setIconName] = useState("");
-  const [icons, setIcons] = useState([
-    "fa fa-facebook",
-    "fa fa-twitter",
-    "fa fa-instagram",
-  ]);
+  const [footer, setFooter] = useState([]);
+  const [iconName, setIconName] = useState("fa fa-");
+  const [linkAddress, setLinkAddress] = useState("https://");
+  const [icons, setIcons] = useState([]);
+
+  const getFooter = async () => {
+    try {
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/footer`);
+      setFooter(res.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getFooter();
+  }, []);
+
   const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    actions.resetForm();
+    try {
+      const res = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_URL}/footer/${footer._id}`,
+        {
+          location: values.location,
+          email: values.email,
+          phoneNumber: values.phoneNumber,
+          desc: values.desc,
+          openingHours: {
+            day: values.day,
+            hour: values.time,
+          },
+          socialMedia: socialMediaLinks,
+        }
+      );
+      if (res.status === 200) {
+        toast.success("Footer updated successfully");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
+      enableReinitialize: true,
       initialValues: {
-        location: "",
-        phoneNumber: "",
-        email: "",
-        desc: "",
-        day: "",
-        time: "",
+        location: footer?.location,
+        phone: footer?.phone,
+        email: footer?.email,
+        desc: footer?.desc,
+        day: footer?.openingHours?.day,
+        time: footer?.openingHours?.hour,
       },
       onSubmit,
       validationSchema: footerSchema,
@@ -51,7 +85,7 @@ const Footer = () => {
     },
     {
       id: 3,
-      name: "phoneNumber",
+      name: "phone",
       type: "number",
       placeholder: "Your Phone Number",
       value: values.phoneNumber,
@@ -88,7 +122,7 @@ const Footer = () => {
     },
   ];
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1>FOOTER SETTİNGS</h1>
       <div className="grid lg:grid-cols-2 gap-3">
         {inputs.map((input) => (
@@ -102,13 +136,18 @@ const Footer = () => {
       </div>
       <div>
         <div>
-          <Input placeholder="Link Address" value="https://" onChange="" />
+          <Input
+            placeholder="Link Address"
+            value={linkAdress}
+            onChange={(e) => setLinkAdress(e.target.value)}
+          />
           <Input
             placeholder="Icon Name"
-            onChange={(e) => setIconName(e.target.name)}
+            onChange={(e) => setIconName(e.target.value)}
             value={iconName}
           ></Input>
           <button
+            type="button"
             className="bg-red-400 rounded-lg  px-3 py-1 text-white"
             onClick={() => {
               setIcons((prev) => prev.filter((item, i) => i !== index));
@@ -118,7 +157,9 @@ const Footer = () => {
           </button>
         </div>
       </div>
-      <button className="btn-primary mt-4">Update</button>
+      <button type="submit" className="bg-red-400 mt-4 ">
+        Update
+      </button>
     </form>
   );
 };

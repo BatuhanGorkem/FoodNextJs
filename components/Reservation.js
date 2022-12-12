@@ -3,9 +3,22 @@ import Input from "./form/Input";
 import { useFormik } from "formik";
 
 import { reservationSchema } from "../schema/reservationSchema";
+
 const Reservation = () => {
   const onSubmit = async (value, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail`, {
+        method: "POST",
+        body: JSON.stringify(value),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    alert(JSON.stringify(value, null, 2));
+
     actions.resetForm();
   };
   const { values, handleSubmit, handleChange, errors, touched, handleBlur } =
@@ -14,8 +27,7 @@ const Reservation = () => {
         fullName: "",
         phoneNumber: "",
         email: "",
-        persons: "",
-        date: "",
+        topic: "",
       },
       onSubmit,
       validationSchema: reservationSchema,
@@ -50,30 +62,29 @@ const Reservation = () => {
     },
     {
       id: 4,
-      name: "persons",
-      type: "number",
-      placeholder: "How Many Persons?",
+      name: "topic",
+      type: "text",
+      placeholder: "Topic",
       value: values.persons,
       errorMessage: errors.persons,
       touched: touched.persons,
     },
-    {
-      id: 5,
-      name: "date",
-      type: "datetime-local",
-      placeholder: "How Many Persons?",
-      value: values.date,
-      errorMessage: errors.date,
-      touched: touched.date,
-    },
+    // {
+    //   id: 5,
+    //   name: "date",
+    //   type: "datetime-local",
+    //   placeholder: "How Many Persons?",
+    //   value: values.date,
+    //   errorMessage: errors.date,
+    //   touched: touched.date,
+    // },
   ];
 
   return (
-    <div className="py-8 flex gap-3 px-20">
-      <div className="basis-1/2">
-        <h1>Book a Table</h1>
+    <div className="py-8 flex gap-3 px-40 ">
+      <div className="basis-1/2 ">
+        <h1 className=" text-[20px] font-semibold">Contact Us</h1>
         <form onSubmit={handleSubmit}>
-          {" "}
           {inputs.map((input) => (
             <Input
               key={input.id}
@@ -84,9 +95,9 @@ const Reservation = () => {
           ))}
           <button
             type="submit"
-            className="bg-primary rounded-xl px-4 py-1 text-center text-white"
+            className=" relative bg-gradient-to-r from-cyan-500 to-blue-500 py-1 px-3 rounded-lg  text-white hover:scale-105 transition-all"
           >
-            Book Now
+            <span>Send</span>
           </button>
         </form>
       </div>

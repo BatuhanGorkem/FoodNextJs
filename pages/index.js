@@ -3,30 +3,41 @@ import Campaigns from "../components/Campaigns";
 import MenuWrapper from "../components/products/MenuWrapper";
 import Reservation from "../components/Reservation";
 
-export default function Home({ categoryList, productList }) {
+export default function Home({ dataCat, dataProduct }) {
   return (
     <>
       <Campaigns></Campaigns>
       <MenuWrapper
-        productList={productList}
-        categoryList={categoryList}
+        // productList={productList}
+        // categoryList={categoryList}
+        dataCat={dataCat}
+        dataProduct={dataProduct}
       ></MenuWrapper>
-      <Reservation></Reservation>
+      <div className="py-10">
+        <Reservation></Reservation>
+      </div>
     </>
   );
 }
 export const getServerSideProps = async () => {
-  const category = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/categories`
+  const category = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/categories`,
+    {
+      headers: {
+        "content-type": "application/json",
+      },
+    }
   );
-  const product = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/products`
-  );
+  const dataCat = await category.json();
+
+  const product = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+
+  const dataProduct = await product.json();
 
   return {
     props: {
-      categoryList: category.data ? category.data : [],
-      productList: product.data ? product.data : [],
+      dataCat,
+      dataProduct,
     },
   };
 };

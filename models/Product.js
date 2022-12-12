@@ -10,9 +10,9 @@ const ProductSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    prices: {
-      type: [Number],
-    },
+    // prices: {
+    //   type: [Number],
+    // },
     category: {
       type: String,
       required: true,
@@ -20,14 +20,14 @@ const ProductSchema = new mongoose.Schema(
     img: {
       type: String,
     },
-    extraOptions: {
-      type: [
-        {
-          text: { type: String },
-          price: { type: Number },
-        },
-      ],
-    },
+    // extraOptions: {
+    //   type: [
+    //     {
+    //       text: { type: String },
+    //       price: { type: Number },
+    //     },
+    //   ],
+    // },
   },
   { timestamps: true }
 );

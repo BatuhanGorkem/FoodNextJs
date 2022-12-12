@@ -7,6 +7,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: "izmir", sans-serif;
+  position: relative;
+  min-height: 100vh;
 }
 
 a {

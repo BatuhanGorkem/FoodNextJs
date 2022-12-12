@@ -44,6 +44,9 @@ const Profile = ({ tabs, setTabs }) => {
       <div onClick={() => setTabs(3)} className="my-2 border cursor-pointer">
         <span>Footer</span>
       </div>
+      <div onClick={() => setTabs(4)} className="my-2 border cursor-pointer">
+        <span>About</span>
+      </div>
       <div onClick={closeAdmin} className="my-2 border cursor-pointer">
         <span>Exıt</span>
       </div>
